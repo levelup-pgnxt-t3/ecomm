@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  ecomm:
+    image: ecomm:1.0
+    container_name: newecomm
+    networks:
+      - compose-bridge
+    depends_on:
+      - mongo-ecomm
+
+  mongo-ecomm:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: secret
+    ports:
+      - 27017:27017
+    volumes:
+    - type: volume
+      source: db-mongo-ecomm
+      target: /app
+
+networks:
+  compose-bridge:
+    driver: bridge
+
+volumes:
+  db-mongo-ecomm:
