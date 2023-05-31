@@ -5,25 +5,21 @@ services:
     container_name: newecomm
     networks:
       - compose-bridge
-    depends_on:
-      - mongo-ecomm
 
   mongo-ecomm:
     image: mongo
-    restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: secret
     ports:
       - 27017:27017
     volumes:
-    - type: volume
-      source: db-mongo-ecomm
-      target: /app
+    - type: bind
+      source: C:\Users\n134415\OneDrive - Santander Office 365\Documentos\projetos-github\ecomm/mongo
+      target: /mongo-scripts
+    # volumes:
+    #   - C:\mongo:/etc/data
 
 networks:
   compose-bridge:
     driver: bridge
-
-volumes:
-  db-mongo-ecomm:
