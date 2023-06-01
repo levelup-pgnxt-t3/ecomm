@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   ecomm:
-    image: ecomm:1.0
+    build: .
     container_name: app-ecomm
 
   mongo-ecomm:
@@ -13,6 +13,9 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: secret
     volumes:
       - db-mongo-ecomm:/data/db
+      - type: bind
+        source: $HOST/C:/Users/gabir/OneDrive/Documentos/NxtDev/ecomm
+        target: /mongo-scripts
     restart: always
     ports:
       - 27017:27017
