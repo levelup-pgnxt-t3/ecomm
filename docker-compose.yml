@@ -1,0 +1,5 @@
+version: '3.9'
+services:
+  ecomm:
+    image: eduardov/ecomm:1.0
+    
