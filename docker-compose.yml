@@ -1,4 +1,20 @@
-version: '3.9'
+version: "3.9"
 services:
   app-ecomm:
     image: ecomm:1.0
+    container_name: ecomm
+
+  mongo-ecomm:
+    image: mongo
+    container_name: mongo-ecomm
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+    volumes:
+      - db-mongo-ecomm:/var/lib/mongodb/data/db
+    ports:
+      - 27017:27017
+
+volumes:
+  db-mongo-ecomm:
+    name: db-mongo-ecomm
