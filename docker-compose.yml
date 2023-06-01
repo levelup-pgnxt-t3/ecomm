@@ -1,0 +1,4 @@
+services:
+  ecomm:
+    image: ecomm:1.0
+    container_name: ecomm
