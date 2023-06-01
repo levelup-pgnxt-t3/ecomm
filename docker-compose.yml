@@ -14,12 +14,14 @@ services:
     ports:
       - 27017:27017
     volumes:
+    - db-mong-ecomm:/data/db
     - type: bind
       source: C:\Users\n134415\OneDrive - Santander Office 365\Documentos\projetos-github\ecomm/mongo
       target: /mongo-scripts
-    # volumes:
-    #   - C:\mongo:/etc/data
 
 networks:
   compose-bridge:
     driver: bridge
+
+volumes:
+  db-mong-ecomm:
