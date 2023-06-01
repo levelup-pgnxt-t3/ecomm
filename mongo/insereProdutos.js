@@ -10,9 +10,6 @@ async function readFileByLine(file)
       input: fileStream,
       crlfDelay: Infinity
     });
-/*rl.forEach((element, index) => {
-    
-});*/
     var i = 1;
     for await (const line of rl) {
         
@@ -48,6 +45,3 @@ async function AddProductsToMongo()
     var insert = db.products.insertMany(lista);
 }
 AddProductsToMongo();
-
-
-
