@@ -1,0 +1,23 @@
+version: "3.9"
+
+volumes:
+  db-mongo-ecomm:
+    name: db-mongo-ecomm
+
+services: 
+  ecomm: 
+    container_name: ecomm
+    build: .
+  mongo-ecomm:
+    image: mongo:latest
+    container_name: mongo-ecomm
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+    volumes:
+      - db-mongo-ecomm:/_data
+      - type: bind
+        source: ./mongo
+        target: /mongo-scripts
+    ports:
+      - 27017:27017
