@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  ecomm:
+    image: ecomm:1.0
+    container_name: app-ecomm
+    networks:
+      - compose-bridge
+  mongo-ecomm:
+    image: mongo
+    container_name: mongo-ecomm
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: secret
+    volumes:
+      - /var/lib/docker/volumes/db-mongo-ecomm
+    ports:
+      - 27017:27017
+
+networks:
+  compose-bridge:
+    driver: bridge
