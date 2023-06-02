@@ -1,7 +1,7 @@
 services:
   ecomm:
     build: .
-    image: ecomm:1.0
+    image: laurobezerra/ecomm:1.0
     container_name: ecomm
   
   mongo-ecomm:
