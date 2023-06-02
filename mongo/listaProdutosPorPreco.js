@@ -1,7 +1,7 @@
 use("ecomm");
 
-const goodStockNivelProducts = db.products.find({
+const products = db.products.find({
 	$and: [{ precoUnitario: { $gte: 1000 } }, { precoUnitario: { $lte: 2000 } }],
 });
 
-console.log(goodStockNivelProducts);
+console.log(products);
