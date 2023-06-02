@@ -1,13 +1,22 @@
+<<<<<<< HEAD
 version: '3.9'
 
 services:
   ecomm:
     build: .
     container_name: app-ecomm
+=======
+version: "3.9"
+services:
+  ecomm:
+    build: .
+    container_name: ecomm
+>>>>>>> 572562ec47f97cf93f3fd1fc2ac11a781908805b
 
   mongo-ecomm:
     image: mongo
     container_name: mongo-ecomm
+<<<<<<< HEAD
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: secret
@@ -15,10 +24,22 @@ services:
       - db-mongo-ecomm:/data/db
       - type: bind
         source: $HOST/C:/Users/gabir/OneDrive/Documentos/NxtDev/ecomm
+=======
+    volumes:
+      - db-mongo-ecomm:/data/db
+      - type: bind
+        source: $HOST/Users/tiagopadua/pagonxt-t3/temp/ecomm/mongo
+>>>>>>> 572562ec47f97cf93f3fd1fc2ac11a781908805b
         target: /mongo-scripts
     restart: always
     ports:
       - 27017:27017
+<<<<<<< HEAD
+=======
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: secret
+>>>>>>> 572562ec47f97cf93f3fd1fc2ac11a781908805b
 
 volumes:
   db-mongo-ecomm:
