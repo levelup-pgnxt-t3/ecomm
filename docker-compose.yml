@@ -7,7 +7,7 @@ services:
 
   mongo-ecomm:
     image: mongo
-    container_name: db-ecomm
+    container_name: mongo-ecomm
     environment: 
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=senha
