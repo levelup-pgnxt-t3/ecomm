@@ -4,17 +4,10 @@ var products = db.products.find(
     [
         {"precoUnitario":{$gte: 1000}},
         {"precoUnitario":{$lte: 2000}}
-    ]});
+    ]},
+    {
+        nome:1,
+        precoUnitario: 1
+    });
 
-var productFields = [];
-
-products.forEach(element => {
-    var product = {
-        _id: element._id,
-        nome: element.nome,
-        estoque: element.precoUnitario
-    };
-    productFields.push(product);
-});
-
-console.log(productFields);
+console.log(products);

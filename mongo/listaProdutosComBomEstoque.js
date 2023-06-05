@@ -1,15 +1,4 @@
 use("ecomm");
-var products = db.products.find({"quantidadeEmEstoque":{$gte: 3}});
+var products = db.products.find({"quantidadeEmEstoque":{$gte: 3}}, {nome: 1, quantidadeEmEstoque: 1});
 
-var productFields = [];
-
-products.forEach(element => {
-    var product = {
-        _id: element._id,
-        nome: element.nome,
-        estoque: element.quantidadeEmEstoque
-    };
-    productFields.push(product);
-});
-
-console.log(productFields);
+console.log(products);
