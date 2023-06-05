@@ -3,3 +3,5 @@ WORKDIR /app-ecomm
 COPY . .
 RUN npm install
 ENTRYPOINT npm start
+
+#cria arquivo dockerfile
