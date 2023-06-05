@@ -1,0 +1,6 @@
+version: "3.9"
+services: 
+  ecomm:
+    build: .
+    container_name: ecomm
+    image: ecomm:1.0
