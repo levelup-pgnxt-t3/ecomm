@@ -1,6 +1,7 @@
 use("ecomm")
 let criaIndicesUnicosAosProdutos = db.products.createIndex(
-  {'ÍNDICE': 1}, {unique: true, sparse: true, expireAfterSeconds: 3600}
+  {SLUG: 1}
 );
 
-console.log(criaIndicesUnicosAosProdutos);
+//console.log(criaIndicesUnicosAosProdutos);
+console.log(db.products.getIndexes());
