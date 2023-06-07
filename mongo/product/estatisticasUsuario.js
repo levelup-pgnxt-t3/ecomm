@@ -11,7 +11,7 @@ let data = db.orders.aggregate([
         $group: { 
             _id: null,
             totalQuantity: {$sum: "$itens.quantidade"},
-            totalValor: {$sum: "$itens.precoUnitario"},
+            totalValor: {$sum: {$multiply: ["$itens.precoUnitario", "$itens.quantidade"]}},
             desconto: {$sum: "$itens.desconto"},
             count: {$sum: 1}
         }
