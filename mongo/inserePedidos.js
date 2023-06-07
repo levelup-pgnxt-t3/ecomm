@@ -59,7 +59,7 @@ db.orders.insertMany([
     itens:[{
         productId: new ObjectId("6478f3c3dbabd0e8882a5fb8"),
         quantidade: -1,
-        precoUnitario: 3523.00
+        precoUnitario: 3523.01
     }]
 }
 ]);
