@@ -1,8 +1,12 @@
 {
     "$jsonSchema": {
       "bsonType": "object",
-      "required": ["nome", "descricao", "slug", "estoque", "preco", "categoria"],
+      "required": ["_id", "nome", "descricao", "slug", "estoque", "preco", "categoria"],
       "properties": {
+        "_id": {
+          "bsonType": "objectId",
+          "description": "Id da categoria"
+        },
         "nome": {
           "bsonType": "string",
           "description": "Nome do produto",
