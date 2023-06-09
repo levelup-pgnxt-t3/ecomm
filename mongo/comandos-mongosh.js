@@ -17,7 +17,7 @@ db.runCommand( { collMod: "categories",
           },
           additionalProperties: false
       }
-})
+});
 
 
 db.runCommand( { collMod: "categories",
