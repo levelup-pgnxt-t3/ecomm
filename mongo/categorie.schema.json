@@ -8,14 +8,17 @@
       ],
       "properties": {
         "_id": {
-          "bsonType": "objectId"
+          "bsonType": "objectId",
+          "description": "Id da categoria"
         },
         "nome": {
           "bsonType": "string",
+          "description": "Nome da categoria",
           "minLength": 3
         },
         "status": {
           "bsonType": "string",
+          "description": "Status da categoria",
           "enum": [
             "ATIVA",
             "INATIVA"
