@@ -1,30 +1,30 @@
 {
     "$jsonSchema": {
-      "type": "object",
+      "bsonType": "object",
       "required": ["nome", "descricao", "slug", "estoque", "preco", "categoria"],
       "properties": {
         "nome": {
-          "type": "string",
+          "bsonType": "string",
           "minLength": 5
         },
         "descricao": {
-          "type": "string",
+          "bsonType": "string",
           "minLength": 10
         },
         "slug": {
-          "type": "string",
+          "bsonType": "string",
           "minLength": 5
         },
         "estoque": {
-          "type": "number",
+          "bsonType": "int",
           "minimum": 0
         },
         "preco": {
-          "type": "number",
+          "bsonType": "double",
           "minimum": 0
         },
         "categoria": {
-          "type": "string",
+          "bsonType": "string",
           "enum": ["AUTOMOTIVA", "CELULARES", "INFORMÁTICA", "LIVROS", "MÓVEIS"]
         }
       },

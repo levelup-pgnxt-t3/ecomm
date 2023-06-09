@@ -1,24 +1,27 @@
 {
     "$jsonSchema": {
-      "type": "object",
-      "required": ["categoria", "status", "campo1", "campo2"],
+      "bsonType": "object",
+      "required": [
+        "_id",
+        "nome",
+        "status"
+      ],
       "properties": {
-        "categoria": {
-          "type": "string",
+        "_id": {
+          "bsonType": "objectId"
+        },
+        "nome": {
+          "bsonType": "string",
           "minLength": 3
         },
         "status": {
-          "type": "string",
-          "enum": ["ATIVA", "INATIVA"]
+          "bsonType": "string",
+          "enum": [
+            "ATIVA",
+            "INATIVA"
+          ]
         },
-        "campo1": {
-          "type": "string"
-        },
-        "campo2": {
-          "type": "string"
-        }
-      },
       "additionalProperties": false
     }
   }
-  
+}
