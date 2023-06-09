@@ -1,4 +1,6 @@
-db.createCollection("accounts",
+use('ecomm')
+
+const createAccountCollection = db.createCollection("accounts",
 {
     validator:{
         $jsonSchema:{
@@ -80,4 +82,4 @@ db.createCollection("accounts",
     }
 })
 
-console.log(createCollectionResult)
+

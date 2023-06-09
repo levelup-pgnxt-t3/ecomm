@@ -1,6 +1,6 @@
 use("ecomm")
 
-db.orders.insertMany([
+const insertOrders = db.orders.insertMany([
   {
     dataPedido: new Date(),
     account: {

@@ -1,5 +1,6 @@
+use('ecomm')
 
-db.createCollection("orders", {
+const createOrderCollection = db.createCollection("orders", {
   validator: {
     $jsonSchema: {
       bsonType: "object",
