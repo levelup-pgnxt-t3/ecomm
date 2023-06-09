@@ -1,5 +1,5 @@
 use("ecomm");
-
+//criação da coleção de pedidos já com esquema de validação
 let result = db.createCollection(
     "orders",
     {

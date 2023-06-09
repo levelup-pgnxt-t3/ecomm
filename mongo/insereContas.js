@@ -1,7 +1,7 @@
 use("ecomm")
 
 config.set('inspectDepth', 100)
-
+//inserção de documentos/usuários na coleção contas
 try {
     const documentos = db.accounts.insertMany([
     {

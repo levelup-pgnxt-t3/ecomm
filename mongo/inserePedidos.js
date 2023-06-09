@@ -1,7 +1,7 @@
 use("ecomm")
 
 config.set('inspectDepth', 100)
-
+//elaboração do json para inserção de pedidos
 try {
     const pedidosInseridos = db.orders.insertMany([
         {
