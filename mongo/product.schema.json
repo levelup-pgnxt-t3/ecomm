@@ -1,0 +1,42 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": ["_id", "NOME", "DESCRICAO", "SLUG", "PRECO", "ESTOQUE", "CATEGORIA"],
+    "properties":{
+      "_id": {
+        "bsonType": "objectId",
+        "description": "Insira um ID válido."
+      },
+      "NOME":{
+        "bsonType": "string",
+        "minLength": 5,
+        "description": "Insira um nome válido (máx de 5 caracteres)."
+      },
+      "DESCRICAO":{
+        "bsonType": "string",
+        "minLength": 10,
+        "description": "Insira uma descrição válida (máx de 10 caracteres)."
+      },
+      "SLUG":{
+        "bsonType": "string",
+        "minLength": 5,
+        "description": "Insira um slug válido (máx de 5 caracteres)."
+      },
+      "PRECO":{
+        "bsonType": "double",
+        "minimum": 0,
+        "description": "Insira um valor válido."
+      },
+      "ESTOQUE":{
+        "bsonType": "int",
+        "minimum": 0,
+        "description": "Insira uma quantidade válida."
+      },              
+      "CATEGORIA":{
+        "enum":["AUTOMOTIVA", "CELULARES", "INFORMÁTICA", "LIVROS", "MÓVEIS"],
+        "description": "Insira uma categoria válidas."
+      }
+    },
+    "additionalProperties": false
+  }
+}
