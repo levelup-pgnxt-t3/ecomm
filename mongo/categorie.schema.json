@@ -1,12 +1,12 @@
 {
 	"$jsonSchema": {
 		"bsonType": "object",
-		"required": ["name", "status"],
+		"required": ["_id", "nome", "status"],
 		"additionalProperties": false,
 		"properties": {
-			"name": {
+			"nome": {
 				"bsonType": "string",
-				"description": "O campo 'name' deve ser uma string e deve conter, no mínimo, 3 caracteres.",
+				"description": "O campo 'nome' deve ser uma string e deve conter, no mínimo, 3 caracteres.",
 				"minLength": 3
 			},
 			"status": {
