@@ -8,7 +8,7 @@ let insereContasNaColecaoAccounts = db.accounts.insertMany([
   "senha": "password123",
   "dataCriacao": ISODate("2021-06-09T00:00:00Z"),
   "cpf": "12345678901",
-  "telefone": "123456-7890",
+  "telefone": "1234567890",
   "endereco": {
     "bairro": "Centro",
     "rua": "Rua Principal",
@@ -43,7 +43,7 @@ let insereContasNaColecaoAccounts = db.accounts.insertMany([
   "senha": "abc123",
   "dataCriacao": ISODate("2021-08-22T00:00:00Z"),
   "cpf": "65432109876",
-  "telefone": "9898765-4321",
+  "telefone": "98987654321",
   "endereco": {
     "bairro": "Lagoa",
     "rua": "Rua das Flores",
