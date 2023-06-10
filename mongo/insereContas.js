@@ -8,7 +8,7 @@ let insereContasNaColecaoAccounts = db.accounts.insertMany([
   "senha": "password123",
   "dataCriacao": ISODate("2021-06-09T00:00:00Z"),
   "cpf": "12345678901",
-  "telefone": "(12) 3456-7890",
+  "telefone": "123456-7890",
   "endereco": {
     "bairro": "Centro",
     "rua": "Rua Principal",
@@ -26,7 +26,7 @@ let insereContasNaColecaoAccounts = db.accounts.insertMany([
   "senha": "pass123",
   "dataCriacao": ISODate("2021-07-15T00:00:00Z"),
   "cpf": "98765432109",
-  "telefone": "(98) 98765-4321",
+  "telefone": "9898765-4321",
   "endereco": {
     "bairro": "Vila Nova",
     "rua": "Avenida Central",
@@ -43,7 +43,7 @@ let insereContasNaColecaoAccounts = db.accounts.insertMany([
   "senha": "abc123",
   "dataCriacao": ISODate("2021-08-22T00:00:00Z"),
   "cpf": "65432109876",
-  "telefone": "(98) 98765-4321",
+  "telefone": "9898765-4321",
   "endereco": {
     "bairro": "Lagoa",
     "rua": "Rua das Flores",
