@@ -80,7 +80,7 @@ db.createCollection("orders", {
 						},
 					},
 				},
-				listagemItens: {
+				itens: {
 					bsonType: "array",
 					minItems: 1,
 					description:
