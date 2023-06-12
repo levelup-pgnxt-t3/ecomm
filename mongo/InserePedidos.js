@@ -1,10 +1,54 @@
 use("ecomm");
 
+const allOfAccounts = db.accounts
+	.find({
+		$or: [
+			{ usuario: "Filipe Garrote" },
+			{ usuario: "Joaquim José" },
+			{ usuario: "Roberto Carlos" },
+		],
+	})
+	.toArray();
+
+const filipeAccountId = allOfAccounts.find(
+	(account) => account.usuario === "Filipe Garrote"
+)._id;
+const joaquimAccountId = allOfAccounts.find(
+	(account) => account.usuario === "Joaquim José"
+)._id;
+const robertoAccountId = allOfAccounts.find(
+	(account) => account.usuario === "Roberto Carlos"
+)._id;
+
+const allOfProducts = db.products
+	.find({
+		$or: [
+			{ nome: "Notebook Samsung" },
+			{ nome: "Sofá 3 lugares" },
+			{ nome: "Clean Architecture" },
+			{ nome: "Mesa de jantar 6 lugares" },
+		],
+	})
+	.toArray();
+
+const notebookId = allOfProducts.find(
+	(product) => product.nome === "Notebook Samsung"
+)._id;
+const sofaId = allOfProducts.find(
+	(product) => product.nome === "Sofá 3 lugares"
+)._id;
+const cleanArchitectureId = allOfProducts.find(
+	(product) => product.nome === "Clean Architecture"
+)._id;
+const mesaId = allOfProducts.find(
+	(product) => product.nome === "Mesa de jantar 6 lugares"
+)._id;
+
 const insertedCorrectOrders = db.orders.insertMany([
 	{
 		dataPedido: new Date(),
 		account: {
-			accountId: ObjectId('6483c8bd7a5f7b2af4ffc0c0'),
+			accountId: filipeAccountId,
 			nomeCliente: "Filipe Garrote",
 		},
 		enderecoEntrega: {
@@ -18,22 +62,22 @@ const insertedCorrectOrders = db.orders.insertMany([
 		},
 		itens: [
 			{
-				productId: ObjectId('647956e57bfb756efdaa868d'),
+				productId: notebookId,
 				quantidade: 1,
-				precoUnitario: NumberDecimal('1276.79'),
-				desconto: NumberDecimal('276.79'),
+				precoUnitario: NumberDecimal("1276.79"),
+				desconto: NumberDecimal("276.79"),
 			},
 			{
-				productId: ObjectId('647956e57bfb756efdaa868e'),
+				productId: sofaId,
 				quantidade: 1,
-				precoUnitario: NumberDecimal('95.17'),
+				precoUnitario: NumberDecimal("95.17"),
 			},
 		],
 	},
 	{
 		dataPedido: new Date(),
 		account: {
-			accountId: ObjectId('6483c8bd7a5f7b2af4ffc0be'),
+			accountId: joaquimAccountId,
 			nomeCliente: "Joaquim José",
 		},
 		enderecoEntrega: {
@@ -47,16 +91,16 @@ const insertedCorrectOrders = db.orders.insertMany([
 		},
 		itens: [
 			{
-				productId: ObjectId('64795753e68ce27f83a8c841'),
+				productId: cleanArchitectureId,
 				quantidade: 3,
-				precoUnitario: NumberDecimal('1276.79'),
+				precoUnitario: NumberDecimal("1276.79"),
 			},
 		],
 	},
 	{
 		dataPedido: new Date(),
 		account: {
-			accountId: ObjectId('6483c8bd7a5f7b2af4ffc0c0'),
+			accountId: robertoAccountId,
 			nomeCliente: "Roberto Carlos",
 		},
 		enderecoEntrega: {
@@ -69,9 +113,9 @@ const insertedCorrectOrders = db.orders.insertMany([
 		},
 		itens: [
 			{
-				productId: ObjectId('647956e57bfb756efdaa868e'),
+				productId: mesaId,
 				quantidade: 1,
-				precoUnitario: NumberDecimal('3678.98'),
+				precoUnitario: NumberDecimal("3678.98"),
 			},
 		],
 	},
