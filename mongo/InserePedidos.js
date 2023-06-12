@@ -31,18 +31,16 @@ const allOfProducts = db.products
 	})
 	.toArray();
 
-const notebookId = allOfProducts.find(
+const notebook = allOfProducts.find(
 	(product) => product.nome === "Notebook Samsung"
-)._id;
-const sofaId = allOfProducts.find(
-	(product) => product.nome === "Sofá 3 lugares"
-)._id;
-const cleanArchitectureId = allOfProducts.find(
+);
+const sofa = allOfProducts.find((product) => product.nome === "Sofá 3 lugares");
+const cleanArchitecture = allOfProducts.find(
 	(product) => product.nome === "Clean Architecture"
-)._id;
-const mesaId = allOfProducts.find(
+);
+const mesa = allOfProducts.find(
 	(product) => product.nome === "Mesa de jantar 6 lugares"
-)._id;
+);
 
 const insertedCorrectOrders = db.orders.insertMany([
 	{
@@ -62,15 +60,15 @@ const insertedCorrectOrders = db.orders.insertMany([
 		},
 		itens: [
 			{
-				productId: notebookId,
+				productId: notebook._id,
 				quantidade: 1,
-				precoUnitario: NumberDecimal("1276.79"),
+				precoUnitario: NumberDecimal(notebook.precoUnitario),
 				desconto: NumberDecimal("276.79"),
 			},
 			{
-				productId: sofaId,
+				productId: sofa._id,
 				quantidade: 1,
-				precoUnitario: NumberDecimal("95.17"),
+				precoUnitario: NumberDecimal(sofa.precoUnitario),
 			},
 		],
 	},
@@ -91,9 +89,9 @@ const insertedCorrectOrders = db.orders.insertMany([
 		},
 		itens: [
 			{
-				productId: cleanArchitectureId,
+				productId: cleanArchitecture._id,
 				quantidade: 3,
-				precoUnitario: NumberDecimal("1276.79"),
+				precoUnitario: NumberDecimal(cleanArchitecture.precoUnitario),
 			},
 		],
 	},
@@ -113,9 +111,9 @@ const insertedCorrectOrders = db.orders.insertMany([
 		},
 		itens: [
 			{
-				productId: mesaId,
+				productId: mesa._id,
 				quantidade: 1,
-				precoUnitario: NumberDecimal("3678.98"),
+				precoUnitario: NumberDecimal(mesa.precoUnitario),
 			},
 		],
 	},
