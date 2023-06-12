@@ -7,7 +7,7 @@ const updateAccountCollection = db.runCommand(
 			$jsonSchema: {
 				bsonType: "object",
 				required: [
-					"username",
+					"usuario",
 					"email",
 					"senha",
 					"dataCriacao",
