@@ -40,10 +40,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Categories"
-      security:
-      - OAuth2:
-        - admin
-  /categories/{id}:
+  /categories/admin/{id}:
     parameters:
     - name: id
       in: path
@@ -129,10 +126,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Products"
-      security:
-      - OAuth2:
-        - admin
-  /products/{id}:
+
+  /products/admin/{id}:
     parameters:
     - name: id
       in: path
@@ -281,11 +276,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Users"
-      security:
-      - OAuth2:
-        - admin            
-  /users/{id}:
+                $ref: "#/components/schemas/Users"         
+  /users/admin/{id}:
     parameters:
     - name: id
       in: path
@@ -384,9 +376,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Orders"
                 
-      security:
-      - OAuth2:
-        - admin          
+      
   /orders/{id}:
     parameters:
     - name: id
@@ -446,8 +436,8 @@ components:
           type: integer
         quantidadeEmEstoque:
           type: integer
-        idCategoria:
-          type: integer
+        Categoria:
+          $ref: "#/components/schemas/Categories"
     Users:
       type: object
       properties:
@@ -501,18 +491,3 @@ components:
         precoUnitarioNaDataDaCompra:
           type: integer
         
-  securitySchemes:
-    OAuth2:
-      type: oauth2
-      flows:
-        authorizationCode:
-          authorizationUrl: https://example.com/oauth/authorize
-          tokenUrl: https://example.com/oauth/token
-          scopes:
-            read: acesso de leitura
-            write: acerro de escrita
-            admin: acesso de admin
-security:
-  - OAuth2:
-      - read
-      - write
