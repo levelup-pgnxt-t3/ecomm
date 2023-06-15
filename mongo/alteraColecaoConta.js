@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+/* eslint-disable no-case-declarations */
 use('ecomm')
 
 const changeAccountCollection = db.runCommand({collMod: 'products',   
@@ -42,7 +45,7 @@ const changeAccountCollection = db.runCommand({collMod: 'products',
           bsonType: "string",
           description: "informe corretamente o telefone do usuario da conta",
           minLength:10,
-          pattern: '^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$'
+          pattern: '^\\([1-9]{2}\\) (?:[2-8]|9[1-9])[0-9]{3}\\-[0-9]{4}$'
         },
         endereco:{
           bsonType: "object",

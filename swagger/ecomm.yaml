@@ -1,0 +1,518 @@
+openapi: 3.0.1
+info:
+  title: API do projeto ecomm
+  description: API para controlar os endpoints da aplicacao
+  version: 0.0.1
+  termsOfService: https://mockapi.io
+externalDocs:
+  description: Documentação burocrática (ex. confluence)
+  url: https://mockapi.io
+servers:
+  - url: https://614951ef035b3600175ba22d.mockapi.io/api/v1/
+    description: API pública mockada
+paths:
+  /categories:
+    get:
+      summary: Recupera todas as categorias
+      responses:
+        200:
+          description: Sucesso
+          content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Categories"
+    post:
+      summary: Cria nova categoria
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                status:
+                  type: string
+      responses:
+        201:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categories"
+      security:
+      - OAuth2:
+        - admin
+  /categories/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera uma categoria pelo ID
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categories"
+        404:
+          description: categoria não encontrada
+          content:
+            application/json:
+              example: "NotFound"
+    delete:
+      summary: Deleta uma categoria
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categories"
+        404:
+          description: categoria não encontrada
+          content:
+            application/json:
+              example: "NotFound"
+    put:
+      summary: Alterar uma categoria
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                status:
+                  type: string
+      responses:
+        404:
+          description: categoria não encontrada
+          content:
+            application/json:
+              example: "NotFound"
+  /products:
+    get:
+      summary: Recupera todos os  produtos
+      responses:
+        200:
+          description: Sucesso
+          content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Products"
+    post:
+      summary: Cria novo Produto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nomeProduto:
+                  type: string
+                descricao:
+                  type: string
+                precoUnitario:
+                  type: integer
+                quantidadeEmEstoque:
+                  type: integer
+      responses:
+        201:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products"
+      security:
+      - OAuth2:
+        - admin
+  /products/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera um produto pelo ID
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products"
+        404:
+          description: produto não encontrado
+          content:
+            application/json:
+              example: "NotFound"
+    delete:
+      summary: Deleta um produto
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products"
+        404:
+          description: produto não encontrada
+          content:
+            application/json:
+              example: "NotFound"
+    put:
+      summary: Alterar um produto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nomeProduto:
+                  type: string
+                descricao:
+                  type: string
+                precoUnitario:
+                  type: integer
+                quantidadeEmEstoque:
+                  type: integer
+      responses:
+        404:
+          description: produto não encontrada
+          content:
+            application/json:
+              example: "NotFound"   
+  /products/precoUnitario={valor}:
+    parameters:
+    - name: valor
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera todos os  produtos com valor determinado
+      responses:
+        200:
+          description: Sucesso
+          content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Products" 
+  /products/idCategoria={valor}:
+    parameters:
+    - name: valor
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera todos os  produtos com uma categoria determinada
+      responses:
+        200:
+          description: Sucesso
+          content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Products" 
+  /products/quantidadeEmEstoque={valor}:
+    parameters:
+    - name: valor
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera todos os  produtos com quantidade em estoque determinada
+      responses:
+        200:
+          description: Sucesso
+          content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Products" 
+  /users:
+    get:
+      summary: Recupera todos os usuarios
+      responses:
+        200:
+          description: Sucesso
+          content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Users"
+    post:
+      summary: Cria um novo usuario
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                email:
+                  type: string
+                senha:
+                  type: integer
+                cpf:
+                  type: string
+                telefone:
+                  type: integer
+                ruaEndereco: 
+                  type: string
+                numeroEndereco: 
+                  type: integer
+                cep: 
+                  type: string
+                cidade: 
+                  type: string
+                estado: 
+                  type: string
+      responses:
+        201:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Users"
+      security:
+      - OAuth2:
+        - admin            
+  /users/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera um usuario pelo ID
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Users"
+        404:
+          description: usuario não encontrado
+          content:
+            application/json:
+              example: "NotFound"
+    delete:
+      summary: Deleta um usuario
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Users"
+        404:
+          description: usuario não encontrado
+          content:
+            application/json:
+              example: "NotFound"
+    put:
+      summary: Alterar um  usuario
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                email:
+                  type: string
+                senha:
+                  type: integer
+                cpf:
+                  type: string
+                telefone:
+                  type: integer
+                ruaEndereco: 
+                  type: string
+                numeroEndereco: 
+                  type: integer
+                cep: 
+                  type: string
+                cidade: 
+                  type: string
+                estado: 
+                  type: string
+      responses:
+        404:
+          description: usuario não encontrado
+          content:
+            application/json:
+              example: "NotFound"
+  /orders:
+    get:
+      summary: Recupera todos os pedidos
+      responses:
+        200:
+          description: Sucesso
+          content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Orders"
+    post:
+      summary: Cria um novo pedido
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                status:
+                  type: string
+      responses:
+        201:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Orders"
+                
+      security:
+      - OAuth2:
+        - admin          
+  /orders/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera um pedido pelo ID
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Orders"
+        404:
+          description: pedido não encontrado
+          content:
+            application/json:
+              example: "NotFound"
+    delete:
+      summary: Deleta um pedido
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Orders"
+        404:
+          description: pedido não encontrado
+          content:
+            application/json:
+              example: "NotFound"
+components:
+  schemas:
+    Categories:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        status:
+          type: string
+    Products:
+      type: object
+      properties:
+        id:
+          type: integer
+        nomeProduto:
+          type: string
+        descricao:
+          type: string
+        precoUnitario:
+          type: integer
+        quantidadeEmEstoque:
+          type: integer
+        idCategoria:
+          type: integer
+    Users:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        email:
+          type: string
+        senha:
+          type: integer
+        cpf:
+          type: string
+        telefone:
+          type: integer
+        ruaEndereco: 
+          type: string
+        numeroEndereco: 
+          type: integer
+        cep: 
+          type: string
+        cidade: 
+          type: string
+        estado: 
+          type: string
+    Orders:
+      type: object
+      properties:
+        id:
+          type: integer
+        idCliente:
+          type: integer
+        ruaEnderecoEntrega:
+          type: string
+        numeroEnderecoEntrega:
+          type: integer
+        complementoEnderecoEntrega:
+          type: string
+        cepEnderecoEntrega:
+          type: string
+        cidadeEnderecoEntrega:
+          type: string
+        estadoEnderecoEntrega:
+          type: string
+        idProduto:
+          type: integer
+        quantidade:
+          type: integer
+        valorDesconto:
+          type: integer
+        precoUnitarioNaDataDaCompra:
+          type: integer
+        
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://example.com/oauth/authorize
+          tokenUrl: https://example.com/oauth/token
+          scopes:
+            read: acesso de leitura
+            write: acerro de escrita
+            admin: acesso de admin
+security:
+  - OAuth2:
+      - read
+      - write
