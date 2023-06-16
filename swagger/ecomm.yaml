@@ -20,6 +20,22 @@ paths:
             content:
               application/json:
                 example: "Not Found"
+  /api/admin/categories:
+    post:
+      summary: Inserção de categorias
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryInput'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
 components:
   schemas:
     Category:
@@ -34,3 +50,9 @@ components:
         status:
           type: string
           description: Status da categoria
+    CategoryInput:
+      type: object
+      properties:
+        nome:
+          type: string
+          description: Nome da categoria
