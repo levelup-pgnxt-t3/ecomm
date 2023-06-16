@@ -14,6 +14,17 @@ function processarComando() {
               console.error('Erro ao listar categorias:', error);
             });
           break;
+        case '--recuperarCategoriaPorId':
+            const id = argsLinhaDeComando[3]
+            CategoryService.findCategoryById(id)
+            .then((categorias) => {
+              console.log('Status Code:', categorias.statusCode);
+              console.log('Categorias:', categorias.data);
+            })
+            .catch((error) => {
+              console.error('Erro ao listar categorias:', error);
+            });
+          break;
     
         default:
           console.log('Comando inválido.');
