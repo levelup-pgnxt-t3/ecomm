@@ -84,6 +84,21 @@ class CategoryService {
                 throw error;
             });
     }
+    static deleteCategory(id) {
+        const url = `http://localhost:3000/categories/${id}`;
+        return fetch(url, {
+            method: 'DELETE'
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Erro ao deletar categoria');
+                }
+                return response.json();
+            })
+            .catch((error) => {
+                throw error;
+            });
+    }
 }
 
 export default CategoryService

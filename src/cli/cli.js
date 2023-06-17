@@ -51,6 +51,16 @@ function processarComando() {
                     console.error('Erro ao atualizar categoria:', error);
                 });
             break;
+        case '--excluirCategoria':
+            const idCategoriaExcluir = argsLinhaDeComando[3];
+            CategoryService.deleteCategory(idCategoriaExcluir)
+                .then(() => {
+                    console.log('Categoria excluída com sucesso');
+                })
+                .catch((error) => {
+                    console.error('Erro ao excluir categoria:', error);
+                });
+            break;
 
         default:
             console.log('Comando inválido.');
