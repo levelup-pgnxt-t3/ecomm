@@ -106,6 +106,111 @@ paths:
         '500':
           description: Erro interno do servidor
           
+  /api/admin/products:
+    post:
+      summary: Inserir um novo produto (apenas para administradores)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NovoProduto'
+      responses:
+        '201':
+          description: Produto criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        '401':
+          description: Acesso não autorizado (não é um administrador)
+        '500':
+          description: Erro interno do servidor
+
+  /api/products:
+    get:
+      summary: Listar produtos existentes (com dados da categoria)
+      responses:
+        '200':
+          description: Lista de produtos com dados da categoria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListaProdutos'
+        '500':
+          description: Erro interno do servidor
+
+  /api/products/{id}:
+    get:
+      summary: Detalhar um produto pelo ID (com dados da categoria)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID do produto a ser detalhado
+      responses:
+        '200':
+          description: Dados do produto com dados da categoria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        '404':
+          description: Produto não encontrado
+        '500':
+          description: Erro interno do servidor
+
+  /api/admin/products/{id}:
+    put:
+      summary: Atualizar dados de um produto (apenas para administradores)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID do produto a ser atualizado
+        - in: body
+          name: body
+          required: true
+          description: Dados do produto a serem atualizados
+          schema:
+            $ref: '#/components/schemas/Produto'
+      responses:
+        '200':
+          description: Produto atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        '401':
+          description: Acesso não autorizado (não é um administrador)
+        '404':
+          description: Produto não encontrado
+        '500':
+          description: Erro interno do servidor
+
+  /api/admin/products/{id}:
+    delete:
+      summary: Remover um produto (apenas para administradores)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID do produto a ser removido
+      responses:
+        '204':
+          description: Produto removido com sucesso
+        '401':
+          description: Acesso não autorizado (não é um administrador)
+        '404':
+          description: Produto não encontrado
+        '500':
+          description: Erro interno do servidor
 components:
   schemas:
     Category:
