@@ -58,6 +58,54 @@ paths:
             content:
               application/json:
                 example: "Not Found"
+    put:
+      summary: Atualizar dados de uma categoria (apenas para administradores)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID da categoria a ser atualizada
+        - in: body
+          name: body
+          required: true
+          description: Dados da categoria a serem atualizados
+          schema:
+            $ref: '#/components/schemas/Categoria'
+      responses:
+        '200':
+          description: Categoria atualizada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categoria'
+        '401':
+          description: Acesso não autorizado (não é um administrador)
+        '404':
+          description: Categoria não encontrada
+        '500':
+          description: Erro interno do servidor
+
+    delete:
+      summary: Remover uma categoria (apenas para administradores)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID da categoria a ser removida
+      responses:
+        '204':
+          description: Categoria removida com sucesso
+        '401':
+          description: Acesso não autorizado (não é um administrador)
+        '404':
+          description: Categoria não encontrada
+        '500':
+          description: Erro interno do servidor
+          
 components:
   schemas:
     Category:
