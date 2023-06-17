@@ -38,6 +38,19 @@ function processarComando() {
                     console.error('Erro ao inserir categoria:', error);
                 });
             break;
+        case '--atualizarCategoria':
+            const idCategoria = argsLinhaDeComando[3];
+            const arquivoCategoriaAtualizada = argsLinhaDeComando[4];
+            const categoriaAtualizadaData = fs.readFileSync(arquivoCategoriaAtualizada);
+            const categoriaAtualizada = JSON.parse(categoriaAtualizadaData);
+            CategoryService.updateCategory(idCategoria, categoriaAtualizada)
+                .then((categoria) => {
+                    console.log('Categoria atualizada com sucesso:', categoria);
+                })
+                .catch((error) => {
+                    console.error('Erro ao atualizar categoria:', error);
+                });
+            break;
 
         default:
             console.log('Comando inválido.');

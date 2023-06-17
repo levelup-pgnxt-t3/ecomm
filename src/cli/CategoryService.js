@@ -57,6 +57,33 @@ class CategoryService {
                 throw error;
             });
     }
+    static updateCategory(id, categoria) {
+        const url = `http://localhost:3000/categories/${id}`;
+        const body = JSON.stringify(categoria);
+        return fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: body
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Erro ao atualizar categoria');
+                }
+                return response.json();
+            })
+            .then((categoria) => {
+                return {
+                    id: categoria.id,
+                    nome: categoria.nome,
+                    status: categoria.status
+                };
+            })
+            .catch((error) => {
+                throw error;
+            });
+    }
 }
 
 export default CategoryService
