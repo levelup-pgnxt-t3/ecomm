@@ -318,6 +318,47 @@ paths:
           description: Usuário não encontrado
         '500':
           description: Erro interno do servidor
+  /api/orders:
+    post:
+      summary: Realizar um novo pedido
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NovoPedido'
+      responses:
+        '201':
+          description: Pedido realizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pedido'
+        '500':
+          description: Erro interno do servidor
+
+  /api/orders/{id}:
+    get:
+      summary: Detalhar um pedido pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID do pedido a ser detalhado
+      responses:
+        '200':
+          description: Dados do pedido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pedido'
+        '404':
+          description: Pedido não encontrado
+        '500':
+          description: Erro interno do servidor
+
 
 components:
   schemas:
