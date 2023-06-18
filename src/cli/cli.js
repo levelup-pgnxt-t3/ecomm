@@ -13,6 +13,9 @@ async function processarComando(argumento){
       const resultId = await CategoryService.findCategoriesById(4);
       console.log(resultId);
       break
+    case "--inserirCategoria":
+      const insereCategoria = await CategoryService.createCategory(argumento[3]);
+      console.log(insereCategoria)
   }
 }
 
