@@ -1,0 +1,107 @@
+openapi: 3.0.1
+info:
+  title: API de Categorias
+  description: "API de listagem de categorias"
+  version: 1.0.0
+  contact:
+    name: Suporte a Devs
+    email: gfcarvalho@gmail.com
+    url: https://github.com/gfcarvalhos
+  license:
+    name: "Lincença: GPLv3"
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+externalDocs:
+  description: Link desenvolvedor
+  url: https://github.com/gfcarvalhos
+tags: 
+- name: Categories
+  description: Ações 
+servers:
+  - url: http://localhost:3000/
+paths:
+  /categories:
+    get:
+      tags:
+      - Categories
+      summary: Lista das categorias
+      description: "Retorna a lista completa de categorias"
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categories"
+        '404':
+          description: Não há categorias cadastradas
+          content:
+            application/json:
+              example: "Not Found"
+  /admin/categories:
+    post:
+      tags:
+      - Categories
+      summary: Insere nova categoria
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+        required: true
+      security: 
+      - auth: []
+      responses:
+        '201':
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+  /categories/{id}:
+    get:
+      tags:
+      - Categories
+      summary: Retorna categoria com id especificado
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categories"
+        '404':
+          description: Não há categorias cadastradas
+          content:
+            application/json:
+              example: "Not Found"
+                
+components:
+  schemas:
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        status:
+          type: string
+    Categories:
+      type: array
+      items:
+        $ref: "#/components/schemas/Category"
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      
