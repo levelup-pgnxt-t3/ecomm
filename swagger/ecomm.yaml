@@ -20,6 +20,8 @@ tags:
   description: Ações de tasks desejáveis
 - name: Products
   description: CRUD de Produtos
+- name: Clients
+  description: CRUD de Clientes
 servers:
   - url: http://localhost:3000/
 paths:
@@ -142,6 +144,7 @@ paths:
           content:
             application/json:
               example: "Erro durante a execução"
+              
   /api/admin/categories/active/{id}:
     put:
       tags:
@@ -202,9 +205,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Product"
+                $ref: "#/components/schemas/Products"
         '404':
           description: Falha ao executar
           content:
@@ -239,7 +240,7 @@ paths:
       parameters: 
       - name: id
         in: path
-        description: ID do produto a ser atualizada
+        description: ID do produto a ser atualizado
         schema:
           type: string
         required: true
@@ -272,6 +273,120 @@ paths:
         description: ID do produto a ser deletado
         required: true
         schema:
+          type: integer
+      responses:
+        '200':
+          description: Produto deletado
+          content:
+            application/json:
+              example: "Produto deletado"
+        '404':
+          description: Erro de execução
+          content:
+            application/json:
+              example: "Erro durante a execução"
+              
+  /api/admin/clients:
+    post:
+      tags:
+      - Clients
+      summary: Adiciona cliente
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewClient"
+        required: true
+      responses:
+        '201':
+          description: Cliente criado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Client"
+        '404':
+          description: Erro ao criar novo cliente
+          content:
+            application/json:
+              example: "Erro ao criar novo cliente"  
+    get:
+      tags:
+      - Clients
+      summary: Lista de todos os clientes
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Clients"
+        '404':
+          description: Falha ao executar
+          content:
+            application/json:
+              example: "Falha ao executar"
+  
+  /api/clients/{id}:
+    get:
+      tags:
+      - Clients
+      summary: Lista cliente com ID especificado
+      parameters:
+      - name: id
+        in: path
+        description: ID do cliente a ser requisitado
+        schema:
+          type: integer
+        required: true
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Client" 
+  
+  /api/admin/clients/{id}:
+    put:
+      tags:
+      - Clients
+      summary: Alteração dos dados de um cliente
+      parameters: 
+      - name: id
+        in: path
+        description: ID do cliente a ser atualizado
+        schema:
+          type: string
+        required: true
+      requestBody:
+        description: Dados do cliente atualizados
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Client"
+      responses:
+        '200':
+          description: Cliente atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Client"
+        '404':
+          description: Erro de atualização
+          content:
+            application/json:
+              example: "Erro durante atualização" 
+              
+    delete:
+      tags:
+      - Clients
+      summary: Deleta cliente
+      parameters: 
+      - name: id
+        in: path
+        description: ID do cliente a ser deletado
+        required: true
+        schema:
           type: string
       responses:
         '200':
@@ -283,8 +398,7 @@ paths:
           description: Erro de execução
           content:
             application/json:
-              example: "Erro durante a execução"  
-      
+              example: "Erro durante a execução"
 components:
   schemas:
     Category:
@@ -315,6 +429,71 @@ components:
           type: number
         estoque:
           type: integer
+    Products:
+      type: array
+      items:
+        $ref: "#/components/schemas/Product"
+    NewClient:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        email:
+          type: string
+        senha:
+          type: string
+        cpf:
+          type: string
+        telefone:
+          type: string
+        logradouro:
+          type: string
+        numeroEndereco:
+          type: string
+        complemento:
+          type: string
+        cep:
+          type: string
+        cidade:
+          type: string
+        estado:
+          type: string
+    Client:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        email:
+          type: string
+        senha:
+          type: string
+        cpf:
+          type: string
+        telefone:
+          type: string
+        logradouro:
+          type: string
+        numeroEndereco:
+          type: string
+        complemento:
+          type: string
+        cep:
+          type: string
+        cidade:
+          type: string
+        estado:
+          type: string
+        dataCriacao:
+          type: string
+          format: date
+    Clients:
+      type: array
+      items:
+        $ref: "#/components/schemas/Client"
   securitySchemes:
     auth:
       type: http
