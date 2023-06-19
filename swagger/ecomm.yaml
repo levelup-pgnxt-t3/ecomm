@@ -22,6 +22,8 @@ tags:
   description: CRUD de Produtos
 - name: Clients
   description: CRUD de Clientes
+- name: Orders
+  description: Pedidos
 servers:
   - url: http://localhost:3000/
 paths:
@@ -344,7 +346,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Client" 
+                $ref: "#/components/schemas/Client"
+        '404':
+          description: Falha ao executar
+          content:
+            application/json:
+              example: "Falha ao executar"
   
   /api/admin/clients/{id}:
     put:
@@ -399,6 +406,55 @@ paths:
           content:
             application/json:
               example: "Erro durante a execução"
+              
+  /api/orders:
+    post:
+      tags:
+      - Orders
+      summary: Cria pedido
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewOrder"
+        required: true
+      responses:
+        '201':
+          description: Pedido criado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        '404':
+          description: Erro ao criar novo pedido
+          content:
+            application/json:
+              example: "Erro ao criar novo pedido"
+              
+  /api/orders/{id}:
+    get:
+      tags:
+      - Orders
+      summary: Lista pedido com ID especificado
+      parameters: 
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        '404':
+          description: Falha ao executar
+          content:
+            application/json:
+              example: "Falha ao executar"
+      
 components:
   schemas:
     Category:
@@ -494,6 +550,75 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/Client"
+        
+    NewOrder:
+      type: object
+      properties:
+        id_cliente:
+          type: integer
+        ruaEntrega:
+          type: string
+        numeroEntregada:
+          type: string
+        complementoEntrega:
+          type: string
+        cepEntrega:
+          type: string
+        cidadeEntrega:
+          type: string
+        estadoEntrega:
+          type: string
+        itensEntrega:
+          type: array
+          items:
+            $ref : "#/components/schemas/NewItens"
+    
+    NewItens:
+      type: object
+      properties:
+        id:
+          type: integer
+        quantidade:
+          type: string
+        desconto:
+          type: number
+              
+    Itens:
+      type: object
+      properties:
+        id:
+          type: integer
+        quantidade:
+          type: string
+        desconto:
+          type: number        
+        dataCriacao:
+          type: string
+          format: date
+          
+    Order:
+      type: object
+      properties:
+        id_cliente:
+          type: integer
+        ruaEntrega:
+          type: string
+        numeroEntregada:
+          type: string
+        complementoEntrega:
+          type: string
+        cepEntrega:
+          type: string
+        cidadeEntrega:
+          type: string
+        estadoEntrega:
+          type: string
+        itensEntrega:
+          type: array
+          items:
+            $ref : "#/components/schemas/Itens"
+              
+            
   securitySchemes:
     auth:
       type: http
