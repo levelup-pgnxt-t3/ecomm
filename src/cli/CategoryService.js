@@ -9,7 +9,7 @@ export default class CategoryService{
         const listaDeCategorias = await response.json();
         console.log('status:', chalk.yellow(response.status))
         return listaDeCategorias}
-    }catch(erro) {return chalk.red("Erro ao buscar lista de categorias")}
+    }catch(error) {trataErro(error);}
   }
 
   static async findCategoriesById(id){
@@ -19,9 +19,7 @@ export default class CategoryService{
         const listaFiltrada = await response.json();
         console.log('status:', chalk.yellow(response.status));
         return listaFiltrada;}
-    }catch(error){
-      return chalk.red('Erro ao filtrar lista de categorias');
-    }
+    }catch(error){trataErro(error)}
   }
 
   static async createCategory(caminho){
@@ -39,11 +37,9 @@ export default class CategoryService{
         console.log('response status: ' + chalk.yellow(response.status))
         return response.json()})
       .catch(error => console.log('Erro em inserir categoria: ' + error))
-  
+
       return adicionaCategoria;
-    } catch(error){
-      return chalk.red('Erro ao tentar adicionar categoria');
-    }
+    } catch(error){trataErro(error)}
   }
 
   static async updateCategory(id, caminhoUpgrade){
@@ -63,8 +59,27 @@ export default class CategoryService{
       .catch(error => console.log('Erro em inserir categoria: ' + error))
   
       return atualizaCategoria;
-    } catch(error){
-    return chalk.red('Erro ao tentar adicionar categoria');
+    } catch(error){trataErro(error)}
   }
+
+  static async deleteCategory(id){
+    try{
+      const deletaCategoria = await fetch(`http://localhost:3000/categories/${id}`,
+      {
+        method:'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+      }})
+      .then(response => {
+        console.log('response status: ' + chalk.yellow(response.status))
+        return response.json()})
+      .catch(error => console.log('Erro em deletar categoria: ' + error))
+  
+      return deletaCategoria;
+    } catch(error){trataErro(error)}
   }
+}
+
+function trataErro(error){
+   console.log(chalk.red('Erro ao tentar executar ação:' + error))
 }
