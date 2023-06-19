@@ -201,6 +201,27 @@ paths:
       tags:
       - Products
       summary: Lista todos os produtos
+      parameters: 
+      - in: query
+        name: category
+        description: Filtra por categoria
+        schema:
+          type: string
+      - in: query
+        name: minPrice
+        description: Preço mínimo
+        schema:
+          type: number
+      - in: query
+        name: maxPrice
+        description: Preço máximo
+        schema:
+          type: number
+      - in: query
+        name: minEstoque
+        description: Estoque mínimo
+        schema:
+          type: integer
       responses:
         '200':
           description: Sucesso
