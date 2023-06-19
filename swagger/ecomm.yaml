@@ -14,15 +14,17 @@ externalDocs:
   description: Link desenvolvedor
   url: https://github.com/gfcarvalhos
 tags: 
-- name: Categories
-  description: Ações 
+- name: Categories - Essentials
+  description: Ações de taks essentials
+- name: Categories - Admin
+  description: Ações de tasks desejáveis
 servers:
   - url: http://localhost:3000/
 paths:
   /categories:
     get:
       tags:
-      - Categories
+      - Categories - Essentials
       summary: Lista das categorias
       description: "Retorna a lista completa de categorias"
       responses:
@@ -40,7 +42,7 @@ paths:
   /admin/categories:
     post:
       tags:
-      - Categories
+      - Categories - Essentials
       summary: Insere nova categoria
       requestBody:
         content:
@@ -63,7 +65,7 @@ paths:
   /categories/{id}:
     get:
       tags:
-      - Categories
+      - Categories - Essentials
       summary: Retorna categoria com id especificado
       parameters:
       - name: id
@@ -83,7 +85,83 @@ paths:
           content:
             application/json:
               example: "Not Found"
-                
+  /admin/categories/{id}:
+    put:
+      tags:
+      - Categories - Admin
+      summary: Alteração dos dados de uma categoria
+      parameters: 
+      - name: id
+        in: path
+        description: ID da categoria a ser atualizada
+        schema:
+          type: string
+        required: true
+      requestBody:
+        description: Atualiza os dados de categoria já existentes
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Category"
+      responses:
+        '200':
+          description: Categoria atualizada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        '404':
+          description: Erro de atualização
+          content:
+            application/json:
+              example: "Erro durante atualização"
+    delete:
+      tags:
+      - Categories - Admin
+      summary: Deleta categoria
+      parameters: 
+      - name: id
+        in: path
+        description: ID da categoria a ser deletada
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Categoria deletada
+          content:
+            application/json:
+              example: "Categoria deletada"
+        '404':
+          description: Erro de execução
+          content:
+            application/json:
+              example: "Erro durante a execução"
+  /admin/categories/active/{id}:
+    put:
+      tags:
+      - Categories - Admin
+      summary: Alteração dos dados de uma categoria
+      parameters: 
+      - name: id
+        in: path
+        description: ID da categoria a ser atualizada
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: Categoria ativada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        '404':
+          description: Erro na atualização
+          content:
+            application/json:
+              example: "Erro durante atualização"
+  
 components:
   schemas:
     Category:
