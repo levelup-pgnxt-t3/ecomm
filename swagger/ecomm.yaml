@@ -18,10 +18,12 @@ tags:
   description: Ações de taks essentials
 - name: Categories - Admin
   description: Ações de tasks desejáveis
+- name: Products
+  description: CRUD de Produtos
 servers:
   - url: http://localhost:3000/
 paths:
-  /categories:
+  /api/categories:
     get:
       tags:
       - Categories - Essentials
@@ -39,7 +41,8 @@ paths:
           content:
             application/json:
               example: "Not Found"
-  /admin/categories:
+              
+  /api/admin/categories:
     post:
       tags:
       - Categories - Essentials
@@ -62,7 +65,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Category"
-  /categories/{id}:
+                
+  /api/categories/{id}:
     get:
       tags:
       - Categories - Essentials
@@ -85,7 +89,8 @@ paths:
           content:
             application/json:
               example: "Not Found"
-  /admin/categories/{id}:
+              
+  /api/admin/categories/{id}:
     put:
       tags:
       - Categories - Admin
@@ -137,7 +142,7 @@ paths:
           content:
             application/json:
               example: "Erro durante a execução"
-  /admin/categories/active/{id}:
+  /api/admin/categories/active/{id}:
     put:
       tags:
       - Categories - Admin
@@ -161,7 +166,125 @@ paths:
           content:
             application/json:
               example: "Erro durante atualização"
+              
+  /api/admin/products:
+    post:
+      tags:
+      - Products
+      summary: Adiciona produto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+        required: true
+      responses:
+        '201':
+          description: Produto adicionado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        '404':
+          description: Erro ao adicionar produto
+          content:
+            application/json:
+              example: "Erro ao adicionar produto"
+              
+  /api/products:
+    get:
+      tags:
+      - Products
+      summary: Lista todos os produtos
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+        '404':
+          description: Falha ao executar
+          content:
+            application/json:
+              example: "Falha ao executar"
+                  
+  /api/products/{id}:
+    get:
+      tags:
+      - Products
+      summary: Lista todos os produtos
+      parameters:
+      - name: id
+        in: path
+        description: ID do produto a ser requisitado
+        schema:
+          type: integer
+        required: true
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
   
+  /api/admin/products/{id}:
+    put:
+      tags:
+      - Products
+      summary: Alteração dos dados de um produto
+      parameters: 
+      - name: id
+        in: path
+        description: ID do produto a ser atualizada
+        schema:
+          type: string
+        required: true
+      requestBody:
+        description: Dados do produto atualizados
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        '200':
+          description: Produto atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        '404':
+          description: Erro de atualização
+          content:
+            application/json:
+              example: "Erro durante atualização" 
+              
+    delete:
+      tags:
+      - Products
+      summary: Deleta produto
+      parameters: 
+      - name: id
+        in: path
+        description: ID do produto a ser deletado
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Produto deletado
+          content:
+            application/json:
+              example: "Produto deletado"
+        '404':
+          description: Erro de execução
+          content:
+            application/json:
+              example: "Erro durante a execução"  
+      
 components:
   schemas:
     Category:
@@ -177,6 +300,21 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/Category"
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        descricao:
+          type: string
+        slug:
+          type: string
+        precoUnit:
+          type: number
+        estoque:
+          type: integer
   securitySchemes:
     auth:
       type: http
