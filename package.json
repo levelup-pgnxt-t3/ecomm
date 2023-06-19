@@ -6,12 +6,22 @@
     "type": "module",
     "scripts": {
         "start": "node src/main.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint": ".\\node_modules\\.bin\\eslint .",
+        "lint:fix": "npx eslint --fix . "
     },
     "author": "",
     "license": "MIT",
     "dependencies": {
         "chalk": "^5.2.0",
         "json-server": "^0.17.3"
+    },
+    "devDependencies": {
+        "eslint": "^8.2.0",
+        "eslint-config-airbnb": "^19.0.4",
+        "eslint-plugin-import": "^2.25.3",
+        "eslint-plugin-jsx-a11y": "^6.5.1",
+        "eslint-plugin-react": "^7.28.0",
+        "eslint-plugin-react-hooks": "^4.3.0"
     }
 }
