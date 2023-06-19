@@ -16,6 +16,9 @@ async function processarComando(argumento){
     case "--inserirCategoria":
       const insereCategoria = await CategoryService.createCategory(argumento[3]);
       console.log(insereCategoria)
+    case "--atualizarCategoria":
+      const atualizaCategoria = await CategoryService.updateCategory(argumento[3],argumento[4]);
+      console.log('response data:', atualizaCategoria)
   }
 }
 

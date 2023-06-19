@@ -45,4 +45,26 @@ export default class CategoryService{
       return chalk.red('Erro ao tentar adicionar categoria');
     }
   }
+
+  static async updateCategory(id, caminhoUpgrade){
+    try{
+      const lerArquivoUpgrade = await fs.promises.readFile(caminhoUpgrade, 'utf-8');
+      const atualizaCategoria = await fetch(`http://localhost:3000/categories/${id}`,
+      {
+        method:'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+      },
+      body: lerArquivoUpgrade
+      })
+      .then(response => {
+        console.log('response status: ' + chalk.yellow(response.status))
+        return response.json()})
+      .catch(error => console.log('Erro em inserir categoria: ' + error))
+  
+      return atualizaCategoria;
+    } catch(error){
+    return chalk.red('Erro ao tentar adicionar categoria');
+  }
+  }
 }
