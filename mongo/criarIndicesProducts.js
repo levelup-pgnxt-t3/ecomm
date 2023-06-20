@@ -1,4 +1,6 @@
+/* eslint-disable no-undef */
 use("ecomm");
+
 
 const index1result = db.categories.createIndex({ nome: 1 })
 const index2result = db.categories.createIndex({ categoria: 1 })
