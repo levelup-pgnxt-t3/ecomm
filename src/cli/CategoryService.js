@@ -1,5 +1,16 @@
 import fs from 'fs';
 
+async function newId(){
+    const categoriesList = await fetch('http://localhost:3000/categories')
+    let highestId = categoriesList[0].id;
+    categoriesList.forEach(categoria => {
+        if(highestId < categoria.id){
+            highestId = categoria.id;
+        }
+    });
+    return (highestId + 1)
+}
+
 export class CategoryService {
     static async findCategories(){
         try{
@@ -16,13 +27,8 @@ export class CategoryService {
 
     static async findCategoryById(id){
         try{
-            const categoriesList = await fetch('http://localhost:3000/categories')
-            const categoriesListJson = categoriesList.json()
-            const categoryById = categoriesListJson.find(category => {
-                if(category.id === id){
-                    return category
-                }
-            })
+            const categorieFetchById = await fetch(`http://localhost:3000/categories${id}`, {method: 'GET'})
+            const categoryById  = categorieFetchById.json()
 
             if(categoryById != undefined){
                 console.log(`Response status: ${categoriesList.status}`)
@@ -37,18 +43,14 @@ export class CategoryService {
         }
     };
     
-    static async createcategory(){
-        const encoding = 'utf-8'
-        const newcategory = fs.promises.readFile('./src/cli/novaCategoria.json', encoding)
-
+    static async createcategory(data){
         try {
-            const category = await newcategory
             const categoryCreated = await fetch('http://localhost:3000/categories', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: category
+                body: data
             })
             categoryResponse = await categoryCreated.json()
             console.log(`Response status: ${categoryCreated.status}`)

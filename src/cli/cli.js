@@ -23,7 +23,8 @@ const processarComando = async () => {
             break;
 
         case '--inserirCategoria':
-            const novaCategoria = await CategoryService.createcategory()
+            const categoriaObjBody = await fs.promises.readFile(comandoArgs[4], 'utf-8')
+            const novaCategoria = await CategoryService.createcategory(categoriaObjBody)
             console.log(novaCategoria, 'Criada com Sucesso')
 
             break;
