@@ -6,7 +6,7 @@ class CategoriaController {
             res.status(200).json(categorias)
         })
     }
-    static cadastrarCategoria= (req, res) => {
+    static ativacaoCategoria= (req, res) => {
         let categoria = new categorias(req.body);
         categoria.save((err) => {
             if(err) {
@@ -16,7 +16,7 @@ class CategoriaController {
             }
         })
     }
-    static atualizarCategoria = (req, res) => {
+    static alteracaoCategoria = (req, res) => {
         const id = req.params.id;
         categorias.findByIdAndUpdate(id, {$set: req.body}, (err) => {
             if(!err) {
@@ -36,7 +36,7 @@ class CategoriaController {
             }
         })
     }
-    static excluirCategoria = (req, res) => {
+    static remocaoCategoria = (req, res) => {
         const id = req.params.id;
         categorias.findByIdAndDelete(id, (err) => {
             if(!err) {
